@@ -1,0 +1,326 @@
+<?php	
+$DateTime = date("Y-m-d H:i:s", mktime(date("H")+0, date("i")+0, date("s")+0, date("m")+0 , date("d")+0, date("Y")+0));
+$Date = date("Y-m-d");
+ if(!empty($Sql)){
+ 
+ 	if($Sql=='Insert'){
+
+		$strField2 = "  
+		`mb_id` ,
+		`mb_user` ,
+		`mb_pass` ,
+		`mb_name` ,
+		`mb_card_id` ,
+		`mb_address` ,
+		`mb_district` ,
+		`mb_province` ,
+		`mb_zipcode` ,
+		`mb_tel` ,
+		`mb_email` ";
+			
+			$mb_card_id = $_REQUEST['mb_user'];
+										
+		// Insert  --------------------------------------------------------------------------------------//					
+		$strValue2 = "
+		'0', 
+		'".$_REQUEST['mb_user']."', 
+		'".$_REQUEST['mb_pass']."', 
+		'".$_REQUEST['mb_name']."', 
+		'".$mb_card_id."', 
+		'".$_REQUEST['mb_address']."', 
+		'".$_REQUEST['mb_district']."', 
+		'".$_REQUEST['mb_province']."', 
+		'".$_REQUEST['mb_zipcode']."', 
+		'".$_REQUEST['mb_tel']."', 
+		'".$_REQUEST['mb_email']."' "; 
+	
+		//ดึงข้อมูลในตาราง มาตรวจว่ามีข้อมูล่ซ่ำกันหรือไม่
+		$sql = mysqli_query($con,"SELECT * FROM ".$member." WHERE mb_user='".$_REQUEST['mb_user']."'");
+		if(@mysqli_num_rows($sql)>= 1){
+			$rs = mysqli_fetch_array($sql);
+				$name = $rs[mb_user];
+				exit("<script>alert('ชื่อ login : $name ถูกใช้งานแล้ว!');(history.back());</script>"); 
+				}
+	 
+		//เพิ่มข้อมูลลงในตาราง 
+		$sql_Insert = mysqli_query($con,"INSERT INTO ".$member." ($strField2) VALUES ($strValue2) ");
+		if($sql_Insert){
+			$list_id = mysql_insert_id($con,);
+		}else{
+			exit("<script>alert('บันทึกข้อมูลสมาชิกไม่ได้');(history.back());</script>"); 
+		}
+	
+	}else if($Sql=='Update'){
+	
+
+	// Update -------------------------------------------------------------------------------------//
+		$mb_card_id = $_REQUEST['mb_user'];
+		$strCommand2 = "
+								`mb_user` = '".$_REQUEST['mb_user']."', 
+								`mb_pass` = '".$_REQUEST['mb_pass']."', 
+								`mb_name` = '".$_REQUEST['mb_name']."', 
+								`mb_card_id` = '".$mb_card_id ."', 
+								`mb_address` = '".$_REQUEST['mb_address']."', 
+								`mb_district` = '".$_REQUEST['mb_district']."', 
+								`mb_province` = '".$_REQUEST['mb_province']."', 
+								`mb_zipcode` = '".$_REQUEST['mb_zipcode']."', 
+								`mb_tel` = '".$_REQUEST['mb_tel']."', 
+								`mb_email` = '".$_REQUEST['mb_email']."'  ";
+								
+		$strCondition2 =  " mb_id='".$_REQUEST['mb_id']."' ";
+ 
+		$sql_Update = mysqli_query($con,"Update ".$member." Set  $strCommand2 Where $strCondition2 ");
+		if($sql_Update){
+		
+			$sql = mysqli_query($con,"Select * From $member Where mb_user='".$_REQUEST['mb_user']."'");
+			$num_mb = mysqli_num_rows($sql);
+			if($num_mb>1){
+					$sql = mysqli_query($con,"Update ".$member." Set mb_user='".$_REQUEST['chk_user']."' Where mb_id='".$_REQUEST['mb_id']."'");
+					exit("<script>alert('เลขบัตรประชาชน ".$_REQUEST['mb_user']." ใช้งานแล้ว');(history.back());</script>");
+				}
+				
+			}else{
+			exit("<script>alert('บันทึกข้อมูลสมาชิกไม่ได้');(history.back());</script>"); 
+			}	
+	}
+ 
+ 
+// Field  --------------------------------------------------------------------------------------//
+
+$strField = "  
+`rent_id` ,
+`rent_mb_id` ,
+`rent_room_id` ,
+`rent_deposits` ,
+`rent_check_in` ,
+`rent_status` ";
+									
+// Insert  --------------------------------------------------------------------------------------//				
+
+	$DateT = explode("/",$_REQUEST['rent_check_in']);
+	$DTime = ($DateT[2]-543).'-'.$DateT[1].'-'.$DateT[0];
+			
+$rent_status = 'ใช้บริการ';
+$strValue = "
+'0', 
+'".$list_id."', 
+'".$_REQUEST['rent_room_id']."', 
+'".$_REQUEST['rent_deposits']."', 
+'".$DTime."', 
+'".$rent_status."' "; 
+
+							
+$id = 'rent_id';
+$fld_name = 'rent_room_id';
+$strCheck = "$fld_name='".$_REQUEST['rent_room_id']."' And rent_status='ใช้บริการ'";
+$msg_check = 'ข้อมูล';
+		
+// Update -------------------------------------------------------------------------------------//
+
+$strCommand = "   
+`rent_room_id` = '".$_REQUEST['rent_room_id']."', 
+`rent_deposits` = '".$_REQUEST['rent_deposits']."', 
+`rent_check_in` = '".$DTime."' ";
+
+$strCondition = " $id ='".$_REQUEST['ID']."' ";
+		
+// Delelte -------------------------------------------------------------------------------------//
+
+$strCondition = "$id ='".$_REQUEST['ID']."' ";
+
+$page_Insert = ""; 
+$page_Delelte = "$Table.php?stt=list&rnt=1";
+
+$msg_Insert = 'บันทึกข้อมูลเรียบร้อยแล้ว';
+$msg_Update = 'บันทึกข้อมูลเรียบร้อยแล้ว';
+		
+
+// Insert Update Delelte --------------------------------------------------------------------//
+//	include "sql-function-db.php";
+?>
+<?php
+// Start switch case  ==================================================//
+	switch($Sql){
+		// ----------------------------------------------------------------------------------------//
+		case 'Insert':
+		// ----------------------------------------------------------------------------------------//
+		
+		//ดึงข้อมูลในตาราง มาตรวจว่ามีข้อมูล่ซ่ำกันหรือไม่
+		$sql = mysqli_query($con,"SELECT * FROM ".$Table." WHERE $strCheck");
+		if(@mysqli_num_rows($sql)>= 1){
+			$rs = mysqli_fetch_array($sql);
+				$name = $rs[$fld_name];
+				exit("<script>alert('มีข้อมูลนี้ในระบบแล้ว');(history.back());</script>"); 
+				}
+	 
+		//เพิ่มข้อมูลลงในตาราง 
+		$sql_Insert = mysqli_query($con,"INSERT INTO ".$Table." ($strField) VALUES ($strValue) ");
+		if($sql_Insert){
+			$list_id = mysql_insert_id($con,);
+			
+			$sql = mysqli_query($con,"Update ".$room." Set room_status='ห้องเช่าแล้ว' Where room_id='".$_REQUEST['rent_room_id']."'");
+
+			exit("<script>alert('บันทึกข้อมูลเรียบร้อยแล้ว');window.location='rent.php?stt=derail&ID=".$list_id."';</script>");	
+			}else{
+			exit("<script>alert('บันทึกข้อมูลไม่ได้!');(history.back());</script>");
+			}
+ 
+		break;
+	 
+		// ----------------------------------------------------------------------------------------//
+		case 'Update':
+		// ----------------------------------------------------------------------------------------//
+		
+		$sql = mysqli_query($con,"Select * From $rent Where rent_id='".$_REQUEST['ID']."'");
+			$rs = mysqli_fetch_array($sql);
+		 		$rent_room_id = $rs['rent_room_id'];
+				$rent_status = $rs['rent_status'];
+				
+		if($rent_status=='ใช้บริการ'){
+			$sql = mysqli_query($con,"Select * From $room Where room_id='".$rent_room_id."' And room_status='ห้องเช่าแล้ว'");
+			$rs = mysqli_fetch_array($sql);
+					$room_id = $rs['room_id'];
+					$room_name = $rs['room_name'];
+					$room_type_id = $rs['room_type_id'];
+					$room_status = $rs['room_status'];
+			} 
+				
+		 $sql_Update = mysqli_query($con,"Update ".$Table." Set  $strCommand Where $strCondition ");
+		
+		if($sql_Update){
+		
+			if($room_id != $_REQUEST['rent_room_id']){
+				$sql = mysqli_query($con,"Update ".$room." Set room_status='ห้องว่าง' Where room_id='".$room_id."'");
+				$sql = mysqli_query($con,"Update ".$room." Set room_status='ห้องเช่าแล้ว' Where room_id='".$_REQUEST['rent_room_id']."'");
+				}
+ 
+			exit("<script>alert('บันทึกข้อมูลเรียบร้อยแล้ว');(history.back());</script>");
+			}else{
+			exit("<script>alert('บันทึกข้อมูลไม่ได้!');(history.back());</script>");
+			}	
+ 
+		break;
+		
+		// ----------------------------------------------------------------------------------------//
+		case 'Delete': 
+		// ----------------------------------------------------------------------------------------//
+		// ลบข้อมูลตามรหัสที่ส่งมา 
+		$sql = mysqli_query($con,"Select * From $rent Where rent_room_id='".$_REQUEST['ID']."'");
+					$rs = mysqli_fetch_array($sql);
+							$rent_id = $rs['rent_id'];	
+							$rent_mb_id = $rs['rent_mb_id'];
+							$rent_room_id = $rs['rent_room_id'];
+							$rent_deposits = $rs['rent_deposits'];
+							$rent_check_in = $rs['rent_check_in'];
+							$rent_status = $rs['rent_status'];
+		
+		
+			$sql_delete = mysqli_query($con,"Delete FROM ".$Table." WHERE $strCondition");
+			if($sql_delete){
+			
+					 @mysqli_query($con,"Delete FROM ".$member." WHERE mb_id='".$rent_mb_id."'");
+					 @mysqli_query($con,"Delete FROM ".$bill." WHERE bill_rent_id='".$rent_id."'");
+					 @mysqli_query($con,"Delete FROM ".$bill_detail." WHERE bl_bill_id='".$rent_id."'");
+					 @mysqli_query($con,"Delete FROM ".$rent." WHERE rent_room_id='".$rent_room_id."'");
+ 
+			exit("<script>window.location='".$page_Delelte."';</script>");	
+			}else{
+			exit("<script>alert('error : ลบข้อมูลไม่ได้!');(history.back());</script>");
+			}	
+		break;
+		
+		// ----------------------------------------------------------------------------------------//
+		case 'Cancel':  // ยกเลิกการเช่าจอง 
+		// ----------------------------------------------------------------------------------------//
+	
+		$sql = mysqli_query($con,"Select * From $rent Where rent_id='".$_REQUEST['ID']."'");
+			$rs = mysqli_fetch_array($sql);
+				$rent_room_id = $rs['rent_room_id'];
+			 	$rent_status = $rs['rent_status'];
+		
+	 	$sql_cancel = mysqli_query($con,"Update ".$rent." Set rent_status='เลิกใช้บริการ' Where rent_id='".$_REQUEST['ID']."'");
+		if($sql_cancel){
+			$update = mysqli_query($con,"Update ".$room." Set room_status='ห้องว่าง' Where room_id='".$rent_room_id."'");
+				if($update){
+				exit("<script>alert(' ทำรายการสำเร็จ ');(history.back());</script>");
+				}
+			}else{
+			exit("<script>alert(' Error : ทำรายการไม่ได้! ');(history.back());</script>");
+			}
+ 
+		break;
+		
+		// ----------------------------------------------------------------------------------------//
+		default:
+		// ----------------------------------------------------------------------------------------//
+		exit("<script>alert('ไม่พบ SQL Action -> ".$Sql." ที่ส่งมาจากฟอร์ม!');(history.back());</script>");
+		}
+// END switch case  ==================================================//	 
+?>
+<?php
+// Insert Update Delelte --------------------------------------------------------------------//
+
+	}else{ 
+		// Result Table
+		$ID = $rs['rent_id'];	
+		$name = $rs['rent_room_id'];
+		
+			$DateT = explode("-",$rs['rent_check_in']);
+			$InputDate = $DateT[2].'/'.$DateT[1].'/'.($DateT[0]+543);
+
+		$rent_id = $rs['rent_id'];	
+		$rent_mb_id = $rs['rent_mb_id'];
+		$rent_room_id = $rs['rent_room_id'];
+		$rent_deposits = $rs['rent_deposits'];
+		$rent_check_in = $rs['rent_check_in'];
+		$rent_status = $rs['rent_status'];
+		
+$sql = mysqli_query($con,"Select * From $member Where mb_id='".$rent_mb_id."'");
+$rs = mysqli_fetch_array($sql);
+		$mb_id = $rs['mb_id'];
+		$mb_user = $rs['mb_user'];
+		$mb_pass = $rs['mb_pass'];
+		$mb_name = $rs['mb_name'];
+		$mb_card_id = $rs['mb_card_id'];
+		$mb_address = $rs['mb_address'];
+		$mb_district = $rs['mb_district'];
+		$mb_province = $rs['mb_province'];
+		$mb_zipcode = $rs['mb_zipcode'];
+		$mb_tel = $rs['mb_tel'];
+		$mb_email = $rs['mb_email'];
+
+$sql = mysqli_query($con,"Select * From $room Where room_id='".$rent_room_id."'");
+$rs = mysqli_fetch_array($sql);
+		$room_id = $rs['room_id'];
+		$room_name = $rs['room_name'];
+		$room_type_id = $rs['room_type_id'];
+		$room_status = $rs['room_status'];
+		
+$sql = mysqli_query($con,"Select * From $room_type Where type_id='".$room_type_id."'");
+$rs = mysqli_fetch_array($sql);
+		$type_id = $rs['type_id'];	
+		$type_name = $rs['type_name'];
+		$type_detail = $rs['type_detail'];
+		$type_price = $rs['type_price'];
+		
+$sql = mysqli_query($con,"Select * From $bill Where bill_rent_id='".$rent_id."' Order By bill_id Desc ");
+  $numrs_bill = mysqli_num_rows($sql);
+
+if($numrs_bill==0){
+		 	$bill_date = "ไม่มีข้อมูล";
+		}else{
+$rs = mysqli_fetch_array($sql);		
+		$bill_id = $rs['bill_id'];	
+		$bill_rent_id = $rs['bill_rent_id'];
+		$bill_mb_id = $rs['bill_mb_id'];
+		$bill_name = $rs['bill_name'];
+		$bill_total = $rs['bill_total'];
+		$bill_date = $rs['bill_date'];
+		$bill_status = $rs['bill_status'];
+	}	
+		
+		
+		} // End SQL
+	
+ ?>
+ 

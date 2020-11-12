@@ -1,0 +1,361 @@
+/* CSS Document */
+
+body{
+  margin: 0;
+  width: 100%;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 20px;
+  color: #333333;
+  	background:url(backgroud.jpg);
+    background: #ddd;
+}
+#white{color: white;}
+#red{color: red;}
+#green{color: #009900;}
+#pink{ color: #FF00FF;}
+#black{ color: #666;}
+#blue{ color: blue;}
+#f-left{ text-align:left; }
+#f-center{ text-align:center; }
+#f-right{ text-align:right; }
+#p-list{padding: 3px; border-bottom: 1px dashed #eee; font-size: 13px;}
+#p-none{padding: 3px; font-size: 13px;}
+#p-null{ color: red; font-size: 15px;};
+#f-left{ text-align:left; }
+#f-center{ text-align:center; }
+#f-right{ text-align:right; }
+
+ul#menu-left{ 
+list-style-type:none;
+margin: 0px; padding: 0px;
+}
+
+ul#menu-left li{ 
+list-style-type:none;
+margin: 0px; padding: 5px;
+padding: 5px;
+border-bottom: 1px solid #999;
+}
+
+ul#menu-left li a:link, a:active{
+	color: #333;
+	text-decoration: none;
+}
+
+ul#menu-left li a:hover, a:visited{
+	color: #fff;
+	text-decoration: none;
+}
+
+
+#Container-box{
+	width: 950px;
+	margin: -1px auto 0px  auto;
+	height: auto;
+	box-shadow:  0px  0px 5px 0px #ddd;
+	border: 1px solid #ddd; 
+	border-radius: 0px;
+	padding: 0px;
+	background-color: none;
+}
+
+#index-login{
+	width: 450px;
+	margin: 13% auto 10px  auto;
+	height: auto;
+	box-shadow:  0px  0px 5px 0px #ddd;
+	border-radius: 0px;
+	padding: 10px;
+	background-color: #fff;
+}
+
+#header{
+	width: 100%;
+	margin: -1px auto 0 auto;
+	height: 220px;
+	background-image:url(bander.jpg);
+	background-position: center;
+	background-position: top;
+}
+#login-left{
+	padding: 5px;
+	border-radius: 5px;
+	border: 2px solid #aaa;
+	background: #aaa;
+	margin-top: -5px;
+}
+
+#menu{
+	width: 100%;
+	margin: 0 auto;
+	height: auto;
+	border-top: 0px solid #ddd;
+	border-bottom: 0px solid #eee;
+}
+#ul-box{
+	width: 99%;
+ 	height: auto;
+	background: none;
+	margin: 0 auto;
+	padding: 5px 0px 5px 0px;
+}
+#container{
+	width: 100%;
+	height: auto;
+	margin:0 auto;
+	/* background: url('bgl.png') 214px 0px repeat-y;  */
+}
+#left-content{
+	width: 22%;
+	height: auto;
+	padding: 5px;
+	border-radius: 0px;
+	float:left;
+	
+}
+#right-content{
+	width: 74%;
+	margin: 0px 5px 0px 0px;
+	height:auto;
+	padding: 10px;
+ 	background-color:#FFF;
+	border-radius: 2px;
+	float:right;
+	border-radius: 5px;
+	
+}
+#selection{
+	padding: 0px 10px 10px 10px; 
+	margin: 5px 5px 5px 0px;
+	border: 0px dashed #ddd;
+	border-radius: 5px;
+	background-color:#FFF;
+}
+#footer{
+	width: 100%;
+	margin: 0px auto 0px auto;
+	height: 70px;
+	text-align:center;
+	border-top: 1px solid #ddd;
+}
+
+h1{
+	margin-bottom: 5px;
+}
+
+#clear-both{
+clear:both;
+}
+
+#box-content-left{
+border: 0px dashed #ddd;
+box-shadow:  0px  0px 0px 0px #eee;
+padding:5px; height:auto; 
+}
+#box-content-right{
+border: 0px solid #eee;
+border-radius: 5px;
+box-shadow:  0px  0px 0px 0px #eee;
+padding: 5px; height:auto; 
+}
+h2{
+	margin-top: 2px;
+}
+#title-txt{
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 10px;
+  font-size: 21px;
+  line-height: 30px;
+  color: #333333;
+  border: 0;
+  border-bottom: 5px solid #666;
+}
+#title-h2{
+	 cursor:default;
+	display: inline-block; width: 480px;
+	font-size: 21px;
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+ 
+#title-profile{
+ border: 0px dashed #ddd; 
+ padding:5px;
+ text-align: center;
+ border-radius: 5px;
+ text-align:center;
+ margin: 0px 0px 5px 0px;
+ background-color:#fdfdfd;
+ margin-top: -5px;
+}
+
+#profile{
+	padding: 0px 5px 0px 0px;
+	margin: 0px 5px 5px 5px;
+	line-height: 10px;
+}
+
+/* เกี่ยวกับ ส่วนรับข้อความที่เป็น textfield */
+ .form-horizontal .control-label {
+  float: left;
+  width: 110px;
+  padding-top: 5px;
+  text-align: right;
+}
+.form-horizontal .control-group {
+  margin-bottom: 5px;
+  *zoom: 1;
+}
+.form-horizontal .controls {
+  *display: inline-block;
+  *padding-left: 20px;
+  margin-left: 120px;
+  *margin-left: 0;
+}
+
+.form-horizontal .controls:first-child {
+  *padding-left: 110px;
+}
+.btn {
+	margin: 0px;
+	line-height: 22px;
+}
+#button-sys{
+	padding: 2px;
+}
+ 
+/* ====== end form ====== */
+
+ul#nav{
+list-style-type:none;
+margin:0;
+padding:0;
+overflow:hidden;
+}
+ul#nav li{
+float:left;
+}
+ul#nav li a:link,a:visited{
+display:block;
+ margin-left: 17px;
+font-weight:bold;
+color:#333;
+background-color:#FFF;
+text-align:center;
+padding:4px;
+text-decoration:none;
+ 
+}
+
+ul#nav li a:hover,a:active{
+background-color:#FFF;
+color: #FD6220;
+text-decoration: none;
+}
+
+.img-photo{
+border:1px solid #ddd; padding: 5px;
+ 
+}
+.img-photo:hover{
+border:1px solid #ccc; padding: 5px;
+box-shadow:  0px  1px 1px 0px #eee;
+}
+ 
+
+
+ /* ส่วนการแบ่งหน้า */
+.browse_page{  
+    clear:both;  
+    height:35px;  
+    margin-top:5px;  
+    display:block;  
+	
+}  
+.browse_page a,.browse_page a:hover{  
+    display:block;  
+    height:20px;  
+    width:20px;  
+    font-size:12px;  
+    float:left;  
+    margin-right:2px;  
+    border:1px solid #f4f4f4;  
+    background-color:#fff;  
+    color: #333;  
+    text-align:center;  
+    line-height:18px;  
+    font-weight:bold;  
+    text-decoration:none;  
+	border-radius: 3px;
+}
+
+.browse_page a:hover{  
+    border:1px solid #eee;  
+    background-color:#f4f4f4;  
+    color: #990000;  
+}  
+.browse_page a.selectPage{  
+    display:block;  
+    height:20px;  
+    width:20px;  
+    font-size:12px;  
+    float:left;  
+    margin-right:2px;  
+    border:1px solid #eee;  
+    background-color:#f4f4f4;  
+     color: #990000;  
+    text-align:center;  
+    line-height: 18px;  
+    font-weight:bold;  
+}  
+
+.browse_page a.SpaceC{  
+    display:block;  
+    height:20px;  
+    width:20px;  
+    font-size:12px;  
+    float:left;  
+    margin-right:2px;  
+    border:0px dotted #f4f4f4;  
+    font-size:13px;  
+    background-color:#fff;  
+    color:#333;  
+    text-align:center;  
+    line-height:18px;  
+    font-weight:bold;  
+}  
+.browse_page a.naviPN{  
+    float:left;  
+    width:50px;  
+	height:20px;  
+    font-size:12px;  
+    display:block;  
+    border:1px solid #f4f4f4;  
+    background-color:#fff;  
+    color:#666;  
+    text-align:center;  
+    line-height:18px;  
+    font-weight:bold;     
+}  
+.browse_page a.naviPN:hover{  
+    width:50px;  
+    font-size:12px;  
+    display:block;  
+    height:20px;  
+    float:left;  
+    border:1px solid #eee;  
+    background-color:#eee;  
+    color:#333;  
+    text-align:center;  
+    line-height:18px;  
+    font-weight:bold;     
+}  
+.none{
+	list-style: none;
+}
+.none li{
+	display: inline;
+}
